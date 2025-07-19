@@ -6,9 +6,13 @@ import { TdoaDashboard } from './components/dashboards/TdoaDashboard';
 import { TdoaKalmanDashboard } from './components/dashboards/TdoaKalmanDashboard';
 import { TdoaMlDashboard } from './components/dashboards/TdoaMlDashboard';
 import { AoaDashboard } from './components/dashboards/AoaDashboard';
+import { SinglePointDashboard } from './components/dashboards/SinglePointDashboard';
+import { MultiPointDashboard } from './components/dashboards/MultiPointDashboard';
+import { AboutUsDashboard } from './components/dashboards/AboutUsDashboard';
+import { ContactUsDashboard } from './components/dashboards/ContactUsDashboard';
 
-// ✅ Add 'home' to your type
-export type LocalizationMethod = 'home' | 'twr' | 'tdoa' | 'tdoa-kalman' | 'tdoa-ml' | 'aoa';
+// ✅ Add 'about' and 'contact' to your type
+export type LocalizationMethod = 'home' | 'single-point' | 'multi-point' | 'twr' | 'tdoa' | 'tdoa-kalman' | 'tdoa-ml' | 'aoa' | 'about' | 'contact';
 
 function App() {
   const [activeMethod, setActiveMethod] = useState<LocalizationMethod>('home'); // ✅ default to home
@@ -17,6 +21,14 @@ function App() {
     switch (activeMethod) {
       case 'home':
         return <HomeDashboard />;
+      case 'single-point':
+        return <SinglePointDashboard />;
+      case 'multi-point':
+        return <MultiPointDashboard />;
+      case 'about':
+        return <AboutUsDashboard />;
+      case 'contact':
+        return <ContactUsDashboard />;
       case 'twr':
         return <TwrDashboard />;
       case 'tdoa':

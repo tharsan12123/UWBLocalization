@@ -1,21 +1,29 @@
 import React, { useState } from 'react';
 import { LocalizationMethod } from '../App';
 import { Home, Radio, User, Users, Info, Phone, Menu, X } from 'lucide-react';
+import { LucideIcon } from 'lucide-react';
 
 interface NavigationProps {
   activeMethod: LocalizationMethod;
   onMethodChange: (method: LocalizationMethod) => void;
 }
 
+interface NavItem {
+  id: string;
+  label: string;
+  icon: LucideIcon;
+  onClick?: () => void;
+}
+
 export const Navigation: React.FC<NavigationProps> = ({ activeMethod, onMethodChange }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   
-  const navItems = [
+  const navItems: NavItem[] = [
     { id: 'home' as LocalizationMethod, label: 'Home', icon: Home },
-    { id: 'single-point', label: 'Single Point', icon: User, onClick: () => onMethodChange('twr') },
-    { id: 'multi-point', label: 'Multi Point', icon: Users, onClick: () => onMethodChange('tdoa') },
-    { id: 'about', label: 'About Us', icon: Info },
-    { id: 'contact', label: 'Contact Us', icon: Phone },
+    { id: 'single-point' as LocalizationMethod, label: 'Single Point', icon: User },
+    { id: 'multi-point' as LocalizationMethod, label: 'Multi Point', icon: Users },
+    { id: 'about' as LocalizationMethod, label: 'About Us', icon: Info },
+    { id: 'contact' as LocalizationMethod, label: 'Contact Us', icon: Phone },
   ];
 
   const toggleMenu = () => {
@@ -44,7 +52,11 @@ export const Navigation: React.FC<NavigationProps> = ({ activeMethod, onMethodCh
             {navItems.map((item) => (
               <button
                 key={item.id}
-                onClick={item.onClick || (() => item.id === 'home' ? onMethodChange('home') : null)}
+                onClick={item.onClick || (() => {
+                  if (typeof item.id === 'string' && ['home', 'single-point', 'multi-point', 'about', 'contact'].includes(item.id)) {
+                    onMethodChange(item.id as LocalizationMethod);
+                  }
+                })}
                 className={`
                   flex items-center space-x-2 px-4 py-2 rounded-lg transition-all duration-200
                   ${activeMethod === item.id 
@@ -68,7 +80,9 @@ export const Navigation: React.FC<NavigationProps> = ({ activeMethod, onMethodCh
                 key={item.id}
                 onClick={() => {
                   if (item.onClick) item.onClick();
-                  else if (item.id === 'home') onMethodChange('home');
+                  else if (typeof item.id === 'string' && ['home', 'single-point', 'multi-point', 'about', 'contact'].includes(item.id)) {
+                    onMethodChange(item.id as LocalizationMethod);
+                  }
                   setIsMenuOpen(false);
                 }}
                 className={`
