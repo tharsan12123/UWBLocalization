@@ -1,47 +1,11 @@
 import React, { useState } from 'react';
-import { Maximize2, Minimize2 } from 'lucide-react';
-
-// Graph components
-const GraphComponent: React.FC<{ 
-  title: string;
-  description: string;
-  onFullScreen: () => void; 
-  isFullScreen: boolean 
-}> = ({ 
-  title,
-  description,
-  onFullScreen, 
-  isFullScreen 
-}) => {
-  const [isHovered, setIsHovered] = useState(false);
-  
-  return (
-    <div 
-      className={`relative bg-white rounded-lg shadow-lg ${isFullScreen ? 'p-6' : 'p-4'} border border-gray-200`}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
-      <div className="flex justify-between items-center mb-4">
-        <h3 className="text-lg font-semibold text-gray-800">{title}</h3>
-        {(isHovered || isFullScreen) && (
-          <button 
-            onClick={onFullScreen}
-            className="text-gray-600 hover:text-blue-600 transition-colors"
-          >
-            {isFullScreen ? <Minimize2 size={20} /> : <Maximize2 size={20} />}
-          </button>
-        )}
-      </div>
-      
-      <div className={`${isFullScreen ? 'h-[70vh]' : 'h-60'} bg-gray-50 rounded-lg flex items-center justify-center`}>
-        <div className="text-center">
-          <p className="text-gray-500 mb-2">{title} Placeholder</p>
-          <p className="text-sm text-gray-400">{description}</p>
-        </div>
-      </div>
-    </div>
-  );
-};
+import { Minimize2 } from 'lucide-react';
+import { 
+  RawTdoaGraph, 
+  TdoaKalmanGraph, 
+  TdoaMlGraph, 
+  TdoaComparisonGraph 
+} from '../charts/TdoaGraphs';
 
 // Full screen modal component
 const FullScreenModal: React.FC<{ 
@@ -81,29 +45,6 @@ export const MultiPointDashboard: React.FC = () => {
   
   const closeFullScreen = () => setFullScreenGraph(null);
   
-  const graphs = [
-    {
-      id: 'rawTdoa',
-      title: 'Raw TDOA',
-      description: 'Time Difference of Arrival raw measurements from multiple anchors'
-    },
-    {
-      id: 'tdoaKalman',
-      title: 'TDOA with Kalman',
-      description: 'TDOA data filtered using Kalman filter for improved accuracy'
-    },
-    {
-      id: 'tdoaMl',
-      title: 'TDOA with ML',
-      description: 'TDOA data enhanced with machine learning algorithms'
-    },
-    {
-      id: 'comparison',
-      title: 'Comparison Graph',
-      description: 'Comparative analysis of all three TDOA approaches'
-    }
-  ];
-  
   return (
     <div className="space-y-6">
       <div className="flex flex-col space-y-2">
@@ -118,34 +59,72 @@ export const MultiPointDashboard: React.FC = () => {
       </div>
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {graphs.map(graph => (
-          <GraphComponent
-            key={graph.id}
-            title={graph.title}
-            description={graph.description}
-            onFullScreen={() => setFullScreenGraph(graph.id as any)}
-            isFullScreen={false}
-          />
-        ))}
+        <RawTdoaGraph 
+          onFullScreen={() => setFullScreenGraph('rawTdoa')} 
+          isFullScreen={false}
+        />
+        <TdoaKalmanGraph 
+          onFullScreen={() => setFullScreenGraph('tdoaKalman')} 
+          isFullScreen={false}
+        />
+        <TdoaMlGraph 
+          onFullScreen={() => setFullScreenGraph('tdoaMl')} 
+          isFullScreen={false}
+        />
+        <TdoaComparisonGraph 
+          onFullScreen={() => setFullScreenGraph('comparison')} 
+          isFullScreen={false}
+        />
       </div>
       
       {/* Full Screen Modals */}
-      {graphs.map(graph => (
-        <FullScreenModal
-          key={graph.id}
-          isOpen={fullScreenGraph === graph.id}
-          onClose={closeFullScreen}
-          title={graph.title}
-          description={graph.description}
-        >
-          <GraphComponent
-            title={graph.title}
-            description={graph.description}
-            onFullScreen={closeFullScreen}
-            isFullScreen={true}
-          />
-        </FullScreenModal>
-      ))}
+      <FullScreenModal
+        isOpen={fullScreenGraph === 'rawTdoa'}
+        onClose={closeFullScreen}
+        title="Raw TDOA"
+        description="Time Difference of Arrival raw measurements from multiple anchors"
+      >
+        <RawTdoaGraph 
+          onFullScreen={closeFullScreen} 
+          isFullScreen={true}
+        />
+      </FullScreenModal>
+      
+      <FullScreenModal
+        isOpen={fullScreenGraph === 'tdoaKalman'}
+        onClose={closeFullScreen}
+        title="TDOA with Kalman"
+        description="TDOA data filtered using Kalman filter for improved accuracy"
+      >
+        <TdoaKalmanGraph 
+          onFullScreen={closeFullScreen} 
+          isFullScreen={true}
+        />
+      </FullScreenModal>
+      
+      <FullScreenModal
+        isOpen={fullScreenGraph === 'tdoaMl'}
+        onClose={closeFullScreen}
+        title="TDOA with ML"
+        description="TDOA data enhanced with machine learning algorithms"
+      >
+        <TdoaMlGraph 
+          onFullScreen={closeFullScreen} 
+          isFullScreen={true}
+        />
+      </FullScreenModal>
+      
+      <FullScreenModal
+        isOpen={fullScreenGraph === 'comparison'}
+        onClose={closeFullScreen}
+        title="Comparison Graph"
+        description="Comparative analysis of all three TDOA approaches"
+      >
+        <TdoaComparisonGraph 
+          onFullScreen={closeFullScreen} 
+          isFullScreen={true}
+        />
+      </FullScreenModal>
     </div>
   );
 };
