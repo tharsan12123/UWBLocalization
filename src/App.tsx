@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Navigation } from './components/Navigation';
+import { Footer } from './components/Footer';
 import { HomeDashboard } from './components/dashboards/HomeDashboard';
 import { TwrDashboard } from './components/dashboards/TwrDashboard';
 import { TdoaDashboard } from './components/dashboards/TdoaDashboard';
@@ -16,6 +17,23 @@ export type LocalizationMethod = 'home' | 'single-point' | 'multi-point' | 'twr'
 
 function App() {
   const [activeMethod, setActiveMethod] = useState<LocalizationMethod>('home'); // ✅ default to home
+
+  useEffect(() => {
+    // Listen for navigation events from the dashboard components
+    const handleNavigate = (event: Event) => {
+      const customEvent = event as CustomEvent<{ method: LocalizationMethod }>;
+      if (customEvent.detail && customEvent.detail.method) {
+        setActiveMethod(customEvent.detail.method);
+        window.scrollTo(0, 0); // Scroll to top when changing pages
+      }
+    };
+
+    document.addEventListener('navigate', handleNavigate);
+
+    return () => {
+      document.removeEventListener('navigate', handleNavigate);
+    };
+  }, []);
 
   const renderDashboard = () => {
     switch (activeMethod) {
@@ -45,11 +63,16 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <Navigation activeMethod={activeMethod} onMethodChange={setActiveMethod} />
-      <main className="container mx-auto px-4 py-8">
+    <div className={`min-h-screen flex flex-col ${activeMethod === 'home' ? 'bg-black' : 'bg-gray-50'}`}>
+      <Navigation 
+        activeMethod={activeMethod} 
+        onMethodChange={setActiveMethod} 
+        isTransparent={activeMethod === 'home'} 
+      />
+      <main className={`flex-grow ${activeMethod === 'home' ? 'pt-0' : 'pt-20'}`}>
         {renderDashboard()}
       </main>
+      <Footer onMethodChange={setActiveMethod} />
     </div>
   );
 }
