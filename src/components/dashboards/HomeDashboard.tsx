@@ -31,9 +31,6 @@ export const HomeDashboard: React.FC = () => {
   }, [currentIndex]);
 
   const technologies = [
-    { name: "Ultra-Wideband Radio", icon: Radio, description: "High-bandwidth wireless technology for precise ranging" },
-    { name: "TDOA Positioning", icon: Clock, description: "Time Difference of Arrival for multi-anchor positioning" },
-    { name: "Angle of Arrival", icon: Target, description: "Direction-based positioning with phase difference analysis" },
     { name: "Kalman Filtering", icon: Zap, description: "Advanced algorithm for motion tracking and noise reduction" },
     { name: "Machine Learning", icon: Brain, description: "Neural networks that enhance positioning accuracy" },
     { name: "Real-time Visualization", icon: BarChart, description: "Interactive 3D visualization of positioning data" }
@@ -70,6 +67,14 @@ export const HomeDashboard: React.FC = () => {
       description: "Monitor restricted areas, track personnel in hazardous environments, and enhance emergency response."
     }
   ];
+
+  // Smooth scroll handler
+  const handleScroll = (id: string) => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
 
   return (
     <div className="w-full">
@@ -136,6 +141,126 @@ export const HomeDashboard: React.FC = () => {
             </p>
           </div>
 
+          {/* Key Sections Button Group */}
+          <div className="flex flex-wrap justify-center gap-3 mb-12">
+            {[
+              { id: 'uwb', label: 'UWB Intro' },
+              { id: 'twr', label: 'TWR Intro' },
+              { id: 'tdoa', label: 'TDOA Intro' },
+              { id: 'aoa', label: 'AOA' },
+              { id: 'sync', label: 'Synchronizations' },
+              { id: 'multi-anchor', label: 'Multi Anchor Setup' },
+              { id: 'single-anchor', label: 'Single Anchor Setup' },
+              { id: 'chan-est', label: 'Chan Estimation' },
+              { id: 'kalman', label: 'Kalman Improvement' },
+              { id: 'ml', label: 'ML Effect' },
+              { id: 'accuracy', label: 'Accuracy Comparison' },
+              { id: 'scalability', label: 'Scalability' },
+              { id: 'power', label: 'Power Consumption' },
+              { id: 'applications', label: 'Applications' }
+            ].map(btn => (
+              <button
+                key={btn.id}
+                onClick={() => handleScroll(btn.id)}
+                className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-full font-medium transition"
+                type="button"
+              >
+                {btn.label}
+              </button>
+            ))}
+          </div>
+
+          {/* UWB Introduction and Comparison */}
+          <div id="uwb" className="mb-12 max-w-4xl mx-auto text-lg text-gray-700 bg-white rounded-xl shadow p-8">
+            <h3 className="text-2xl font-semibold text-blue-700 mb-3">What is Ultra-Wideband (UWB)?</h3>
+            <p className="mb-4">
+              Ultra-Wideband (UWB) is a radio technology that uses very short pulses over a wide frequency spectrum, enabling highly accurate distance measurements and robust wireless communication. Unlike traditional wireless technologies such as Wi-Fi, Bluetooth, or Zigbee, UWB offers:
+            </p>
+            <ul className="list-disc pl-6 mb-4">
+              <li>Superior ranging accuracy (often sub-10cm) due to its wide bandwidth</li>
+              <li>High resistance to multipath and interference, making it ideal for complex indoor environments</li>
+              <li>Low power consumption, suitable for battery-powered tags and devices</li>
+              <li>Minimal impact from obstacles and non-line-of-sight conditions</li>
+            </ul>
+            <p>
+              These advantages make UWB the preferred choice for next-generation indoor localization, outperforming conventional wireless solutions in precision and reliability.
+            </p>
+
+            {/* UWB Image at the end, full width */}
+            <div className="mt-8">
+              <img
+                src="/UWB.jpeg"
+                alt="Ultra-Wideband Illustration"
+                className="w-full h-auto object-contain rounded-lg"
+              />
+            </div>
+          </div>
+
+          {/* TWR Introduction */}
+          <div id="twr" className="mb-12 max-w-4xl mx-auto text-lg text-gray-700 bg-white rounded-xl shadow p-8">
+            <h3 className="text-2xl font-semibold text-blue-700 mb-3">Two Way Ranging (TWR) & TWR-based Indoor Localization</h3>
+            <p className="mb-4">
+              <b>Two Way Ranging (TWR)</b> is a method where two UWB devices exchange messages to measure the round-trip time of signals. By calculating the time it takes for a signal to travel to a responder and back, the distance between devices can be determined with high precision.
+            </p>
+            <p>
+              <b>TWR-based indoor localization</b> involves a mobile tag performing TWR with multiple fixed anchors. By measuring distances to several anchors, the tag's position can be estimated using trilateration. TWR is simple, robust, and well-suited for scenarios with a moderate number of devices.
+            </p>
+          </div>
+
+          {/* TDOA Introduction */}
+          <div id="tdoa" className="mb-12 max-w-4xl mx-auto text-lg text-gray-700 bg-white rounded-xl shadow p-8">
+            <h3 className="text-2xl font-semibold text-blue-700 mb-3">Time Difference of Arrival (TDOA) & TDOA-based Indoor Localization</h3>
+            <p className="mb-4">
+              <b>Time Difference of Arrival (TDOA)</b> is a technique where a tag transmits a signal received by multiple anchors. Each anchor records the arrival time, and the differences in arrival times are used to compute the tag's position.
+            </p>
+            <p>
+              <b>TDOA-based indoor localization</b> enables real-time tracking of many tags simultaneously, as tags only need to transmit and do not require two-way communication. This method is highly scalable and suitable for large deployments.
+            </p>
+          </div>
+
+          {/* Placeholders for new sections */}
+          <div id="aoa" className="mb-12 max-w-4xl mx-auto text-lg text-gray-700 bg-white rounded-xl shadow p-8">
+            <h3 className="text-2xl font-semibold text-blue-700 mb-3">Angle of Arrival (AOA)</h3>
+            <p>Details about AOA will go here.</p>
+          </div>
+          <div id="sync" className="mb-12 max-w-4xl mx-auto text-lg text-gray-700 bg-white rounded-xl shadow p-8">
+            <h3 className="text-2xl font-semibold text-blue-700 mb-3">Synchronizations</h3>
+            <p>Details about synchronization methods will go here.</p>
+          </div>
+          <div id="multi-anchor" className="mb-12 max-w-4xl mx-auto text-lg text-gray-700 bg-white rounded-xl shadow p-8">
+            <h3 className="text-2xl font-semibold text-blue-700 mb-3">Multi Anchor Setup</h3>
+            <p>Details about multi anchor setup will go here.</p>
+          </div>
+          <div id="single-anchor" className="mb-12 max-w-4xl mx-auto text-lg text-gray-700 bg-white rounded-xl shadow p-8">
+            <h3 className="text-2xl font-semibold text-blue-700 mb-3">Single Anchor Setup</h3>
+            <p>Details about single anchor setup will go here.</p>
+          </div>
+          <div id="chan-est" className="mb-12 max-w-4xl mx-auto text-lg text-gray-700 bg-white rounded-xl shadow p-8">
+            <h3 className="text-2xl font-semibold text-blue-700 mb-3">Channel Estimation</h3>
+            <p>Details about channel estimation will go here.</p>
+          </div>
+          <div id="kalman" className="mb-12 max-w-4xl mx-auto text-lg text-gray-700 bg-white rounded-xl shadow p-8">
+            <h3 className="text-2xl font-semibold text-blue-700 mb-3">Kalman Improvement</h3>
+            <p>Details about Kalman improvement will go here.</p>
+          </div>
+          <div id="ml" className="mb-12 max-w-4xl mx-auto text-lg text-gray-700 bg-white rounded-xl shadow p-8">
+            <h3 className="text-2xl font-semibold text-blue-700 mb-3">ML Effect</h3>
+            <p>Details about machine learning effect will go here.</p>
+          </div>
+          <div id="accuracy" className="mb-12 max-w-4xl mx-auto text-lg text-gray-700 bg-white rounded-xl shadow p-8">
+            <h3 className="text-2xl font-semibold text-blue-700 mb-3">Accuracy Comparison</h3>
+            <p>Details about accuracy comparison will go here.</p>
+          </div>
+          <div id="scalability" className="mb-12 max-w-4xl mx-auto text-lg text-gray-700 bg-white rounded-xl shadow p-8">
+            <h3 className="text-2xl font-semibold text-blue-700 mb-3">Scalability</h3>
+            <p>Details about scalability will go here.</p>
+          </div>
+          <div id="power" className="mb-12 max-w-4xl mx-auto text-lg text-gray-700 bg-white rounded-xl shadow p-8">
+            <h3 className="text-2xl font-semibold text-blue-700 mb-3">Power Consumption</h3>
+            <p>Details about power consumption will go here.</p>
+          </div>
+
+          {/* Remaining features as cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {technologies.map((tech, index) => (
               <div 
@@ -177,7 +302,7 @@ export const HomeDashboard: React.FC = () => {
       </section>
 
       {/* Applications Section */}
-      <section className="py-24 px-4 bg-white">
+      <section id="applications" className="py-24 px-4 bg-white">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">Applications</h2>
