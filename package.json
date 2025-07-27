@@ -1,4 +1,5 @@
 {
+  "homepage": "https://tharsan12123.github.io/UWBLocalization",
   "name": "vite-react-typescript-starter",
   "private": true,
   "version": "0.0.0",
@@ -9,7 +10,7 @@
     "preview": "vite preview",
     "lint": "eslint .",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d build"
   },
   "dependencies": {
     "chart.js": "^4.5.0",
