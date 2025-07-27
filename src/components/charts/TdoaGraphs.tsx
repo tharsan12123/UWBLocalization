@@ -6,6 +6,8 @@ import { ref, onValue } from 'firebase/database';
 import useLocalizationData from '../../useLocalizationData';
 import useKalmanLocalizationData from '../../useKalmanLocalizationData';
 import useMLLocalizationData from '../../useMlLocalizationData';
+import { UwbAnchor } from '../components/UwbAnchor'; // adjust path if needed
+
 import { 
   getDefaultOptions, 
   createPositionDataset, 
@@ -72,13 +74,13 @@ export const RawTdoaGraph: React.FC<TdoaGraphProps> = ({
       </div>
       
       <div className="mt-4 grid grid-cols-2 gap-2 text-sm">
-        <div className="bg-gray-100 p-2 rounded">
+        <div className="bg-gray-50 p-2 rounded">
           <span className="font-semibold">X Position:</span> {tag[0].toFixed(2)} m
         </div>
-        <div className="bg-gray-100 p-2 rounded">
+        <div className="bg-gray-50 p-2 rounded">
           <span className="font-semibold">Y Position:</span> {tag[1].toFixed(2)} m
         </div>
-        <div className="bg-gray-100 p-2 rounded col-span-2">
+        <div className="bg-gray-50 p-2 rounded col-span-2">
           <span className="font-semibold">TDOA Values:</span> {' '}
           A1-A2: {localizationData?.tdoa?.tdoa12.toFixed(3) || '0.000'} ns, 
           A1-A3: {localizationData?.tdoa?.tdoa13.toFixed(3) || '0.000'} ns

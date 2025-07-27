@@ -7,11 +7,11 @@ import {
   Title,
   Tooltip,
   Legend,
+  LineController,
   ScatterController,
-  ChartOptions,
 } from 'chart.js';
 
-// Register ChartJS components
+// Register all needed components
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -20,63 +20,74 @@ ChartJS.register(
   Title,
   Tooltip,
   Legend,
+  LineController,      // <– Required for line drawing
   ScatterController
 );
 
-// Common chart options
-export const getDefaultOptions = (title: string): ChartOptions<'scatter'> => {
-  return {
-    responsive: true,
-    maintainAspectRatio: false,
-    plugins: {
-      legend: {
-        position: 'top' as const,
+// Common chart options with square grid
+export const getDefaultOptions = (title: string) => ({
+  responsive: true,
+  maintainAspectRatio: false,
+  aspectRatio: 1,
+
+  plugins: {
+    legend: {
+      position: 'top',
+      labels: {
+        font: { size: 12 },
+        boxWidth: 12,
       },
+    },
+    title: {
+      display: true,
+      text: title,
+      font: { size: 16 },
+    },
+  },
+
+  scales: {
+    x: {
+      type: 'linear',
       title: {
         display: true,
-        text: title,
-        font: {
-          size: 16,
-          weight: 'bold',
-        },
+        text: 'X [m]',
+        font: { size: 14 },
       },
-      tooltip: {
-        callbacks: {
-          label: function(context) {
-            const label = context.dataset.label || '';
-            return `${label}: (${context.parsed.x.toFixed(2)}, ${context.parsed.y.toFixed(2)})`;
-          }
-        }
-      }
-    },
-    scales: {
-      x: {
-        title: {
-          display: true,
-          text: 'X Position (m)',
-        },
-        ticks: {
-          callback: function(value) {
-            return typeof value === 'number' ? value.toFixed(1) : value;
-          }
-        },
+      min: -0.6,
+      max: 12,
+      ticks: {
+        stepSize: 0.6,
+        font: { size: 12 },
       },
-      y: {
-        title: {
-          display: true,
-          text: 'Y Position (m)',
-        },
-        ticks: {
-          callback: function(value) {
-            return typeof value === 'number' ? value.toFixed(1) : value;
-          }
-        },
+      grid: {
+        color: '#cccccc',
+        lineWidth: 1,
+        drawTicks: true,
       },
     },
-  };
-};
+    y: {
+      type: 'linear',
+      title: {
+        display: true,
+        text: 'Y [m]',
+        font: { size: 14 },
+      },
+      min: -0.6,
+      max: 7.6,
+      ticks: {
+        stepSize: 0.6,
+        font: { size: 12 },
+      },
+      grid: {
+        color: '#cccccc',
+        lineWidth: 1,
+        drawTicks: true,
+      },
+    },
+  },
+});
 
-// Utility to generate random colors
+// Random color utility
 export const getRandomColor = () => {
   const r = Math.floor(Math.random() * 255);
   const g = Math.floor(Math.random() * 255);
@@ -84,7 +95,7 @@ export const getRandomColor = () => {
   return `rgba(${r}, ${g}, ${b}, 0.7)`;
 };
 
-// Create history data for time-series visualization
+// ✅ Draws line-connected trail of tag positions
 export const createHistoryDataset = (
   history: Array<[number, number]>,
   label: string,
@@ -92,19 +103,20 @@ export const createHistoryDataset = (
 ) => {
   return {
     label,
+    type: 'line', // <– Force line type to ensure it connects
     data: history.map(([x, y]) => ({ x, y })),
     backgroundColor: color,
     borderColor: color,
-    borderWidth: 1,
+    borderWidth: 2,
     pointRadius: 3,
     pointHoverRadius: 5,
-    pointStyle: 'circle',
+    fill: false,
+    tension: 0.3,
     showLine: true,
-    tension: 0.4,
   };
 };
 
-// Create position dataset for scatter plots
+// Draws current position as large point
 export const createPositionDataset = (
   x: number,
   y: number,
@@ -113,16 +125,18 @@ export const createPositionDataset = (
 ) => {
   return {
     label,
+    type: 'scatter', // <– just point
     data: [{ x, y }],
     backgroundColor: color,
     borderColor: color,
     borderWidth: 2,
     pointRadius: 8,
     pointHoverRadius: 10,
+    showLine: false,
   };
 };
 
-// Create anchor dataset
+// Anchors with triangle icons
 export const createAnchorDatasets = (
   anchors: { [key: string]: [number, number] }
 ) => {
@@ -134,12 +148,14 @@ export const createAnchorDatasets = (
 
   return Object.entries(anchors).map(([key, [x, y]]) => ({
     label: `Anchor ${key}`,
+    type: 'scatter',
     data: [{ x, y }],
     backgroundColor: colors[key as keyof typeof colors] || 'rgba(201, 203, 207, 1)',
     borderColor: colors[key as keyof typeof colors] || 'rgba(201, 203, 207, 1)',
     borderWidth: 2,
     pointRadius: 10,
-    pointStyle: 'triangle',
     pointHoverRadius: 12,
+    pointStyle: 'triangle',
+    showLine: false,
   }));
 };

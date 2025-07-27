@@ -101,11 +101,11 @@ export const Footer: React.FC<FooterProps> = ({ onMethodChange }) => {
             <ul className="space-y-3">
               <li className="flex items-start space-x-3">
                 <Mail size={18} className="text-gray-400 mt-1 flex-shrink-0" />
-                <span>info@uwblocalization.tech</span>
+                <span>Tharsant884@gmail.com</span>
               </li>
               <li className="flex items-start space-x-3">
                 <Phone size={18} className="text-gray-400 mt-1 flex-shrink-0" />
-                <span>+1 (555) 123-4567</span>
+                <span>+94 707373748</span>
               </li>
               <li className="flex items-start space-x-3 mt-4">
                 <button 

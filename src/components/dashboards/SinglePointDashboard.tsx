@@ -76,7 +76,7 @@ export const SinglePointDashboard: React.FC = () => {
       <FullScreenModal 
         isOpen={fullScreenGraph === 'improved'} 
         onClose={closeFullScreen}
-        title="Improved AOA with ML"
+        title="Improved AOA with Kalman"
       >
         <ImprovedAoaGraph 
           onFullScreen={closeFullScreen} 

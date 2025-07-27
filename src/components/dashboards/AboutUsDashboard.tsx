@@ -4,53 +4,32 @@ import { Info, Radio, Cpu, Layers, Zap, Clock, Target, BarChart } from 'lucide-r
 export const AboutUsDashboard: React.FC = () => {
   const teamMembers = [
     {
-      name: "Dr. Jane Smith",
-      role: "Project Lead",
-      bio: "PhD in Electrical Engineering with 10+ years experience in positioning systems",
-      image: "https://randomuser.me/api/portraits/women/23.jpg"
+     
+    
+      
     },
     {
-      name: "Alex Johnson",
-      role: "Hardware Engineer",
-      bio: "Specializes in UWB antenna design and RF signal processing",
-      image: "https://randomuser.me/api/portraits/men/42.jpg"
+     
+     
     },
     {
-      name: "Maria Rodriguez",
-      role: "Machine Learning Expert",
-      bio: "Developed the ML algorithms that enhance localization accuracy",
-      image: "https://randomuser.me/api/portraits/women/53.jpg"
-    },
-    {
-      name: "David Chen",
-      role: "Software Developer",
-      bio: "Created the real-time visualization platform for UWB data",
-      image: "https://randomuser.me/api/portraits/men/76.jpg"
+      
+      
     }
+
   ];
 
   const technologies = [
     { name: "Ultra-Wideband", icon: Radio, description: "Low-power radio technology for precise indoor positioning" },
     { name: "Time Difference of Arrival", icon: Clock, description: "Localization technique based on signal arrival time differences" },
-    { name: "Angle of Arrival", icon: Target, description: "Direction-based positioning using signal phase differences" },
+    { name: "Angle of Arrival", icon: Target, description: "Direction-based positioning using signal time differences" },
     { name: "Kalman Filtering", icon: Zap, description: "Advanced algorithm for motion tracking and noise reduction" },
-    { name: "Machine Learning", icon: Cpu, description: "AI techniques for improving positioning accuracy" },
-    { name: "Data Visualization", icon: BarChart, description: "Interactive 3D visualization of real-time location data" }
+    { name: "Machine Learning", icon: Cpu, description: "ML techniques for improving positioning accuracy" },
+    { name: "Data Visualization", icon: BarChart, description: "Interactive 2D visualization of real-time location data" }
   ];
 
   const researchPapers = [
-    {
-      title: "Enhanced Indoor Positioning Using UWB and Kalman Filtering",
-      authors: "Smith J., Johnson A., et al.",
-      conference: "IEEE International Conference on Indoor Positioning, 2024",
-      link: "#"
-    },
-    {
-      title: "Machine Learning Approaches for UWB Signal Processing in Complex Environments",
-      authors: "Rodriguez M., Chen D., et al.",
-      conference: "Journal of Location Based Services, Vol. 18, 2024",
-      link: "#"
-    },
+
     {
       title: "Comparative Analysis of TWR, TDOA, and AOA Techniques for Indoor Localization",
       authors: "Johnson A., Smith J., et al.",
@@ -62,11 +41,15 @@ export const AboutUsDashboard: React.FC = () => {
   return (
     <div className="space-y-12 py-6">
       {/* Hero Section */}
-      <div className="bg-gradient-to-r from-blue-600 to-indigo-700 rounded-xl shadow-lg overflow-hidden">
-        <div className="container mx-auto px-6 py-16 text-center">
-          <h1 className="text-4xl font-bold text-white mb-4">About UWB Localization System</h1>
-          <p className="text-xl text-blue-100 max-w-3xl mx-auto">
-            Pioneering next-generation indoor positioning technology with sub-centimeter accuracy
+      <div className="relative rounded-xl shadow-lg overflow-hidden mb-8">
+        {/* Animated Gradient Background */}
+        <div className="absolute inset-0 animate-gradient bg-gradient-to-r from-purple-500 via-pink-100 to-blue-600 opacity-90"></div>
+        <div className="relative container mx-auto px-6 py-16 text-center">
+          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 drop-shadow-lg">
+            About UWB Localization System
+          </h1>
+          <p className="text-xl md:text-2xl text-white max-w-3xl mx-auto drop-shadow">
+            Pioneering next-generation indoor positioning technology with consideration for application scalability.
           </p>
         </div>
       </div>
@@ -78,9 +61,9 @@ export const AboutUsDashboard: React.FC = () => {
           <div>
             <h2 className="text-2xl font-bold text-gray-900 mb-4">Project Overview</h2>
             <p className="text-gray-700 mb-4">
-              The UWB Localization System is a cutting-edge research initiative focused on developing highly accurate 
-              indoor positioning technology using Ultra-Wideband (UWB) radio signals. Our system achieves positioning 
-              accuracy of up to 10cm in complex indoor environments where GPS typically fails.
+            The UWB Localization System is a cutting-edge research initiative focused on developing low-power,
+            scalable indoor positioning technology using Ultra-Wideband (UWB) radio signals. Our system supports 
+            both single-point and multi-point localization.
             </p>
             <p className="text-gray-700 mb-4">
               Leveraging multiple positioning methodologies including Two-Way Ranging (TWR), Time Difference of Arrival 

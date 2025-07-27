@@ -34,29 +34,27 @@ export const ContactUsDashboard: React.FC = () => {
       icon: MapPin,
       title: "Visit Us",
       details: [
-        "UWB Research Lab",
-        "Department of Electrical Engineering",
-        "Tech University",
-        "123 Innovation Drive",
-        "Silicon Valley, CA 94043"
+        "University of Sri Jayewardenepura",
+        "Department of Electrical and Electronic Engineering",
+        "Faculty of Engineering"
       ]
     },
     {
       icon: Mail,
       title: "Email Us",
       details: [
-        "General Inquiries: info@uwblocalization.tech",
-        "Technical Support: support@uwblocalization.tech",
-        "Research Collaboration: research@uwblocalization.tech"
+        "sannithy.thanupiriyan@gmail.com",
+        "tharsant884@gmail.com",
+        "jasmirooban@gmail.com"
       ]
     },
     {
       icon: Phone,
       title: "Call Us",
       details: [
-        "Main Office: +1 (555) 123-4567",
-        "Lab Direct Line: +1 (555) 987-6543",
-        "Hours: 9AM - 5PM (PST), Monday - Friday"
+        "Thanupiriyan: +94 766819810",
+        "Tharsan: +94 707373748",
+        "Jasmika: +94 764389894"
       ]
     }
   ];
@@ -212,7 +210,7 @@ export const ContactUsDashboard: React.FC = () => {
             <div className="text-center">
               <MapPin className="h-12 w-12 text-blue-500 mx-auto mb-3" />
               <p className="text-gray-700">Interactive map would be displayed here</p>
-              <p className="text-sm text-gray-500 mt-2">UWB Research Lab, 123 Innovation Drive, Silicon Valley, CA 94043</p>
+              <p className="text-sm text-gray-500 mt-2">University of sri Jayewardenepura, Faculty Of engineering.</p>
             </div>
           </div>
         </div>
