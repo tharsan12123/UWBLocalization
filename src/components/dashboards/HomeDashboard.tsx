@@ -1,8 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Radio, Clock, Target, Zap, Brain, BarChart, Check, MapPin, Shield, Cpu, ChevronRight, Bookmark } from 'lucide-react';
 import { LocalizationMethod } from '../../App';
+import tharsanVideo from '../../Assets/Tharsan.mp4';
+import uwbImage from '../../Assets/UWB.jpeg';
+import aoaArrowImage from '../../Assets/aoa_arrow.png';
+import syncMethodImage from '../../Assets/sync_method.png';
+import smartTrackingImage from '../../Assets/Smart Indoor Tracking with UWB.png';
 
-const videoSources = ['/Tharsan.mp4'];
+const videoSources = [tharsanVideo];
 
 export const HomeDashboard: React.FC = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -189,7 +194,7 @@ export const HomeDashboard: React.FC = () => {
             {/* UWB Image at the end, full width */}
             <div className="mt-8">
               <img
-                src="/UWB.jpeg"
+                src={uwbImage}
                 alt="Ultra-Wideband Illustration"
                 className="w-full h-auto object-contain rounded-lg"
               />
@@ -249,7 +254,7 @@ export const HomeDashboard: React.FC = () => {
               <div className="relative group w-full max-w-md">
                 <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-blue-400 via-pink-200 to-purple-400 opacity-30 blur-lg group-hover:opacity-50 transition"></div>
                 <img
-                  src="/aoa_arrow.png"
+                  src={aoaArrowImage}
                   alt="AOA Arrow Graph"
                   className="relative z-10 w-full rounded-xl shadow-lg border-4 border-white group-hover:scale-105 transition-transform duration-300"
                 />
@@ -271,7 +276,7 @@ export const HomeDashboard: React.FC = () => {
                   <b>Continuous Periodic Pulse Method:</b> Anchors synchronize using regular timing pulses. This method is illustrated in the figure below, where a master anchor periodically broadcasts its local time to slave anchors, which record the time of arrival (ToA) and synchronize accordingly.
                   <div className="mt-4 flex justify-center">
                     <img
-                      src="/sync_method.png"
+                      src={syncMethodImage}
                       alt="Wireless Synchronization Methodology"
                       className="w-full max-w-xl rounded-xl shadow-lg border-4 border-white"
                     />
@@ -284,7 +289,7 @@ export const HomeDashboard: React.FC = () => {
                   <b>Offset Method:</b> Anchors synchronize by exchanging packets containing their local time and calculating the time offset between devices. In our system, we use the offset method because it offers better accuracy and reliability compared to the periodic pulse method.
                   <div className="mt-4 flex justify-center">
                     <img
-                      src="/Smart Indoor Tracking with UWB.png"
+                      src={smartTrackingImage}
                       alt="Offset Synchronization Example"
                       className="w-full max-w-xl rounded-xl shadow-lg border-4 border-white"
                     />
@@ -314,11 +319,15 @@ export const HomeDashboard: React.FC = () => {
             </p>
             <div className="mt-8 flex justify-center">
               <div className="relative w-full max-w-xl">
-                <img
+                {/* Note: multi_point.png image not found in Assets folder - please add this image */}
+                {/* <img
                   src="/multi_point.png"
                   alt="Multi Anchor Setup Illustration"
                   className="w-full rounded-xl shadow-lg border-4 border-white"
-                />
+                /> */}
+                <div className="bg-gray-200 w-full h-64 rounded-xl shadow-lg border-4 border-white flex items-center justify-center">
+                  <p className="text-gray-500 text-center">Multi Anchor Setup Illustration<br/>(Image: multi_point.png not found)</p>
+                </div>
                 <div className="text-center text-gray-500 text-sm mt-2">
                   Multi-point localization with three anchors: Communication, time difference calculation, and hyperbola intersection for reasonable accuracy and low power consumption.
                 </div>
