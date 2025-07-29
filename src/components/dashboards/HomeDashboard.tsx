@@ -1,8 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Radio, Clock, Target, Zap, Brain, BarChart, Check, MapPin, Shield, Cpu, ChevronRight, Bookmark } from 'lucide-react';
 import { LocalizationMethod } from '../../App';
+//import tharsanVideo from '../../../public/Tharsan.mp4';
 
-const videoSources = ['/Tharsan.mp4'];
+
+const videoSources = [`${import.meta.env.BASE_URL}Tharsan.mp4`];
+console.log(import.meta.env.BASE_URL);
 
 export const HomeDashboard: React.FC = () => {
   const videoRef = useRef<HTMLVideoElement>(null);

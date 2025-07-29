@@ -73,7 +73,7 @@ export const getDefaultOptions = (title: string) => ({
         font: { size: 14 },
       },
       min: -0.6,
-      max: 7.6,
+      max: 7,
       ticks: {
         stepSize: 0.6,
         font: { size: 12 },

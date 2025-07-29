@@ -48,7 +48,7 @@ export const MultiPointDashboard: React.FC = () => {
   return (
     <div className="space-y-6">
       <div className="flex flex-col space-y-2">
-        <h2 className="text-2xl font-bold text-gray-900 text-center">Multi Point Localization</h2>
+        <h2 className="pt-4 text-2xl font-bold text-gray-900 text-center">Multi Point Localization</h2>
         <div className="bg-blue-50 border-l-4 border-blue-500 p-4 mb-4">
           <p className="text-sm text-gray-700">
             This dashboard visualizes multi-point positioning data using Time Difference of Arrival (TDOA) technology.
