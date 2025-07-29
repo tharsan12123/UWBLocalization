@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Radio, Clock, Target, Zap, Brain, BarChart, Check, MapPin, Shield, Cpu, ChevronRight, Bookmark } from 'lucide-react';
 import { LocalizationMethod } from '../../App';
-import tharsanVideo from '../../../Tharsan.mp4';
+import tharsanVideo from '../../../public/Tharsan.mp4';
 
 
 const videoSources = [tharsanVideo];
