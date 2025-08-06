@@ -1,11 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Radio, Clock, Target, Zap, Brain, BarChart, Check, MapPin, Shield, Cpu, ChevronRight, Bookmark } from 'lucide-react';
 import { LocalizationMethod } from '../../App';
-//import tharsanVideo from '../../../public/Tharsan.mp4';
-
 
 const videoSources = [`${import.meta.env.BASE_URL}Tharsan.mp4`];
-console.log(import.meta.env.BASE_URL);
+const imageSource = `${import.meta.env.BASE_URL}UWB.jpeg`;
+const imageSource1 = `${import.meta.env.BASE_URL}aoa_arrow.png`;
+const imageSource3 = `${import.meta.env.BASE_URL}sync_method.png`;
+const imageSource4 = `${import.meta.env.BASE_URL}sync_method.png`;
 
 export const HomeDashboard: React.FC = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -192,7 +193,8 @@ export const HomeDashboard: React.FC = () => {
             {/* UWB Image at the end, full width */}
             <div className="mt-8">
               <img
-                src="/UWB.jpeg"
+              
+                src={imageSource}
                 alt="Ultra-Wideband Illustration"
                 className="w-full h-auto object-contain rounded-lg"
               />
@@ -252,7 +254,7 @@ export const HomeDashboard: React.FC = () => {
               <div className="relative group w-full max-w-md">
                 <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-blue-400 via-pink-200 to-purple-400 opacity-30 blur-lg group-hover:opacity-50 transition"></div>
                 <img
-                  src="/aoa_arrow.png"
+                  src={imageSource1}
                   alt="AOA Arrow Graph"
                   className="relative z-10 w-full rounded-xl shadow-lg border-4 border-white group-hover:scale-105 transition-transform duration-300"
                 />
@@ -274,7 +276,7 @@ export const HomeDashboard: React.FC = () => {
                   <b>Continuous Periodic Pulse Method:</b> Anchors synchronize using regular timing pulses. This method is illustrated in the figure below, where a master anchor periodically broadcasts its local time to slave anchors, which record the time of arrival (ToA) and synchronize accordingly.
                   <div className="mt-4 flex justify-center">
                     <img
-                      src="/sync_method.png"
+                      src={imageSource3}
                       alt="Wireless Synchronization Methodology"
                       className="w-full max-w-xl rounded-xl shadow-lg border-4 border-white"
                     />
@@ -287,7 +289,7 @@ export const HomeDashboard: React.FC = () => {
                   <b>Offset Method:</b> Anchors synchronize by exchanging packets containing their local time and calculating the time offset between devices. In our system, we use the offset method because it offers better accuracy and reliability compared to the periodic pulse method.
                   <div className="mt-4 flex justify-center">
                     <img
-                      src="/Smart Indoor Tracking with UWB.png"
+                      src={imageSource4}
                       alt="Offset Synchronization Example"
                       className="w-full max-w-xl rounded-xl shadow-lg border-4 border-white"
                     />
